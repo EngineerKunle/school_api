@@ -3,6 +3,7 @@ const gulp      = require('gulp'),
 sass            = require('gulp-sass'),
 connect         = require('gulp-connect'),
 uglify          = require('gulp-uglify'),
+shell           = require('gulp-shell'),
 pump            = require('pump');
 
 var filesLocation = {
@@ -11,7 +12,8 @@ var filesLocation = {
     distCss      : 'dist/css/',
     sassFiles    : 'src/front_end/scss/styles.scss',
     jsFiles      : 'src/front_end/js/*.js',
-    distJs       : 'dist/js/'
+    distJs       : 'dist/js/',
+    apiRunFile   : 'src/api/**'
 }
 // Move HTML 
 gulp.task('moveHTML', function() {
@@ -39,6 +41,15 @@ gulp.task('compress', function (cb) {
     ],
     cb
   );
+});
+
+// create api method to stop me from refresh 
+gulp.task('run-api:watch', function() {
+    gulp.watch(filesLocation.apiRunFile, ['run-api'])
+});
+
+gulp.task('run-api', () => {
+    return gulp.src(filesLocation.apiRunFile).pipe(shell('npm run api'))
 });
 
 //handles connecting to local hosts

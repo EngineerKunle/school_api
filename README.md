@@ -10,10 +10,16 @@ npm install
 
 To run API
 ```
-npm api
+npm run api
 ```
 
 To run front-end
 ```
 gulp dev
+```
+
+You can run a gulp script to stop you from refreshing everytime... but this is a work in progress...
+
+````
+gulp run-api:watch
 ```

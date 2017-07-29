@@ -3,7 +3,7 @@ app                 = express(),
 bodyParser          = require('body-parser');
 
 var routes          = require('./routes/routes'),
-exampleRoute    = require('express').Router(),
+exampleRoute        = require('express').Router(),
 port                = 3000;
 
 // app.get('/', function(req, res){
