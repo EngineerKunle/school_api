@@ -6,11 +6,15 @@ module.exports = function(app, exampleRoute) {
        res.json({notes: "This is your notebook. Edit this to start saving your notes!"})
     })
     .post((req, res) => {
-        var user_id = req.body.id;
-        var token = req.body.token;
-        var geo = req.body.geo;
-        res.send(user_id + ' ' + token + ' ' + geo);
-        console.log("user id is" + user_id + "\n" + "token for user " + token + "\n" + "geo is " + geo);
+        let user_id = req.body.id;
+        let token = req.body.token;
+        let geo = req.body.geo;
+        let debugPassword = req.body.password;
+
+        res.send(user_id + ' ' + token + ' ' + geo + '' + debugPassword);
+        console.log("user id is " + user_id + "\n" + "token for user " + token + "\n" + "geo is " + geo + "\n" 
+        + "this is the user password " + debugPassword);
+    
     });
 
     exampleRoute.get('/new' ,function(req, res, next) {
