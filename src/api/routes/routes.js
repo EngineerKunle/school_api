@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(app, exampleRoute) {
 
-    app.route('/student')
+    app.route('/playground')
     .get(function(req, res, next) {
        res.json({notes: "This is your notebook. Edit this to start saving your notes!"})
     })
@@ -28,4 +28,14 @@ module.exports = function(app, exampleRoute) {
     });
 
     app.use('/extend', exampleRoute);
+
+
+    //Main applications for students as above code just use as a playground
+
+    app.route('/student')
+    .get((req, res, next) => {
+        res.json({
+            firstName : "Kunle Ogunjimi"
+        })
+    });
 }
