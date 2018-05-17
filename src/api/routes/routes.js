@@ -29,7 +29,6 @@ module.exports = function(app, exampleRoute) {
 
     app.use('/extend', exampleRoute);
 
-
     //Main applications for students as above code just use as a playground
 
     app.route('/student')
