@@ -31,6 +31,10 @@ module.exports = function(app, exampleRoute) {
 
     //Main applications for students as above code just use as a playground
 
+    app.get('/', (req, res) => {
+        res.json({"message": "Ready to start API"});
+    });
+
     app.route('/student')
     .get((req, res, next) => {
         res.json({
