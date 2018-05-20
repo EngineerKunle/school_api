@@ -3,17 +3,11 @@ app                 = express(),
 bodyParser          = require('body-parser');
 
 var routes          = require('./routes/routes'),
+studentRoutes       = require('./routes/studentRoutes'),
+expressRoutes       = require('express').Router(),
 exampleRoute        = require('express').Router(),
 port                = 3000;
 
-// app.get('/', function(req, res){
-//     res.send('Hello world')
-// });
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+studentRoutes(app, expressRoutes, bodyParser, port)
 
-routes(app, exampleRoute);
-
-app.listen(port, function(){
-    console.log('listening to http://localhost:' + port);
-});
+// routes(app, exampleRoute);

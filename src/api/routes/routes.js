@@ -27,18 +27,5 @@ module.exports = function(app, exampleRoute) {
         res.json({notes: "we in our used method inside events http"})
     });
 
-    app.use('/extend', exampleRoute);
-
-    //Main applications for students as above code just use as a playground
-
-    app.get('/', (req, res) => {
-        res.json({"message": "Ready to start API"});
-    });
-
-    app.route('/student')
-    .get((req, res, next) => {
-        res.json({
-            firstName : "Kunle Ogunjimi"
-        })
-    });
+    // app.use('/extend', exampleRoute);
 }
