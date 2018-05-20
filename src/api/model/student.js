@@ -5,7 +5,8 @@ const mongoose  = require('mongoose'),
 var StudentSchema = new Schema({
     name    : String, 
     surname : String,
-    id      : Number 
+    id      : Number,
+    age     : Number
 });
 
 mongoose.connect(database);
