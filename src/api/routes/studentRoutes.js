@@ -2,9 +2,12 @@
 //working here for School api
 //https://www.callicoder.com/node-js-express-mongodb-restful-crud-api-tutorial/
 //https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
+//https://coursework.vschool.io/mongoose-crud/
 const Student = require('../model/student')
 module.exports = function(app, router, bodyParser, port) {
     let studentUrl = '/school';
+    let routeUrl   = '/students';
+    let deleteUrl  = '/delete/:id'
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -18,7 +21,7 @@ module.exports = function(app, router, bodyParser, port) {
         res.json({message : 'Welcome to the Class of 2018 API'});
     });
 
-    router.route('/students')
+    router.route(routeUrl)
     .post((req, res) => {
         res.set('Content-Type', 'application/json')
         createNewStudent(req, res);
@@ -31,6 +34,20 @@ module.exports = function(app, router, bodyParser, port) {
             res.json(students);
         });
     });
+
+    router.route(deleteUrl)
+    .delete(((req, res) => {
+        Student.findByIdAndRemove({_id : req.params.id}, (err, student) =>{
+             if (err) 
+                 res.status(500).send({message: err});
+
+             const response = {
+                message: "Student successfully deleted"
+            };
+
+            res.status(200).send(response);
+        })
+    }));
 
     app.use(studentUrl, router);
 
@@ -49,7 +66,7 @@ module.exports = function(app, router, bodyParser, port) {
         student.save((err) => {
             if (err)
                 res.send(err);
-            res.json({ message: 'Student created!'});
+            res.status(201).send({message: 'Student created!'});
         });
     }
 }
