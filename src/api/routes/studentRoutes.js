@@ -20,20 +20,8 @@ module.exports = function(app, router, bodyParser, port) {
 
     router.route('/students')
     .post((req, res) => {
-        var student    = new Student();
-        student.name    = req.body.name;
-        student.surname = req.body.surname;
-        student.id      = req.body.id;
-        student.age     = req.body.age;
-
-        // save the bear and check for errors
-        student.save((err) => {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Student created!' });
-        });
-
+        res.set('Content-Type', 'application/json')
+        createNewStudent(req, res);
     })
     .get((req, res)=> {
         Student.find((err, students) =>{
@@ -50,4 +38,18 @@ module.exports = function(app, router, bodyParser, port) {
         console.log('listening to http://localhost:' + port +studentUrl) ;
     });
 
+    // Creates new Students
+    function createNewStudent(req, res) {
+        var student    = new Student();
+        student.name    = req.body.name;
+        student.surname = req.body.surname;
+        student.id      = req.body.id;
+        student.age     = req.body.age;
+
+        student.save((err) => {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Student created!'});
+        });
+    }
 }
