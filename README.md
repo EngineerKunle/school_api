@@ -8,7 +8,7 @@ This is a simple web server api using express js to fire up a pupil attendee lis
 npm install 
 ```
 
-To run API
+To run API, make sure you have mongoDb [set up](https://docs.mongodb.com/manual/tutorial/getting-started/) and running
 ```
 npm run api
 ```

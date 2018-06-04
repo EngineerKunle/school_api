@@ -5,9 +5,10 @@
 //https://coursework.vschool.io/mongoose-crud/
 const Student = require('../model/student')
 module.exports = function(app, router, bodyParser, port) {
-    let studentUrl = '/school';
-    let routeUrl   = '/students';
-    let deleteUrl  = '/delete/:id'
+    let studentUrl    = '/school',
+        routeUrl      = '/students',
+        singleStudent = '/students/:id',
+        deleteUrl     = '/delete/:id';
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -33,6 +34,26 @@ module.exports = function(app, router, bodyParser, port) {
 
             res.json(students);
         });
+    });
+
+    router.route(singleStudent)
+    .get(((req, res) => {
+        Student.findById({_id : req.params.id}, (err, student) => {
+            if(err) 
+                res.json(err);
+            res.json(student);   
+        })
+    }))
+    .put((req, res) => {
+        Student.findById({_id : req.params.id}, (err, student) => {
+            student.name = req.body.name;
+
+            student.save((err) => {
+                if (err)
+                    res.send(err);
+                res.status(201).send({message: 'Student updated!'});
+            });
+        })
     });
 
     router.route(deleteUrl)
