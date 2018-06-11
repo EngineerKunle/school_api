@@ -51,7 +51,7 @@ module.exports = function(app, router, bodyParser, port) {
             student.save((err) => {
                 if (err)
                     res.send(err);
-                res.status(201).send({message: 'Student updated!'});
+                res.status(201).send(student);
             });
         })
     });
